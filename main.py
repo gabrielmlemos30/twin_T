@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import signal
 
-class main:
+class TWIN-T_NOTCH:
     """Classe feita para lidar com o TWIN T"""
     def __init__(self, fc=60, fs=64560, n=2056, k=0.9):
 
@@ -31,10 +31,10 @@ class main:
         self.signalFilter = []
         self.signal = np.zeros_like(self.t)
         "Inicializa o sinal"
-        for harmonic in [1, 3, 5, 7, 11]:
+        for i, harmonic in enumerate([1, 3, 5, 7, 11]):
             f = 60
-            self.signal += (np.cos(2 * np.pi * harmonic * f * self.t) + np.sin(2 * np.pi * harmonic * 2 * f * self.t)  )
-        
+            # self.signal += 1/(i+1)*(np.cos(2 * np.pi * harmonic * f * self.t) + np.sin(2 * np.pi * harmonic * 2 * f * self.t)  )
+            self.signal += 1/(i+1)*(np.cos(2 * np.pi * harmonic * f * self.t))
         "resposta em frequencia"
 
         self.w = []
@@ -137,7 +137,7 @@ class main:
 if __name__ == "__main__":
     fs = 3200
     n = 2056
-    fc = 60
-    k = 0.4
+    fc = 120
+    k = 0.9
     processo = main(fc=fc, fs=fs, n=n, k=k)
     
